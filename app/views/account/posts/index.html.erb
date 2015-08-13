@@ -1,0 +1,20 @@
+<div class="col-md-12">
+  
+  <h2 class="text-center"> 我發表過的文章 </h2>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th> Content </th>
+        <th> Grooup Name </th>
+        <th> Last Update </th>
+        <th><span class="glyphicon glyphicon-file" aria-hidden="true"></span></th>
+        <th><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <%= render :partial => "common/form_account_post", :collection => @posts, :as => :post %>
+    </tbody>
+  </table>
+</div>

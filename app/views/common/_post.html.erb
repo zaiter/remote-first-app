@@ -1,0 +1,9 @@
+<tr>
+  <td><%= render_post_content(post) %></td>
+  <td>
+  <% if current_user == post.author %>
+    <%= link_to("Edit", edit_group_post_path(post.group, post), class: "btn btn-info btn-xs")%>
+    <%= link_to("Delete", group_post_path(post.group, post), class: "btn btn-default btn-xs ", method: :delete, data: { confirm: "Are you sure?" } )%>
+  <% end %>
+  </td>
+</tr>
