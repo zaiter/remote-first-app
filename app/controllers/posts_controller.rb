@@ -10,6 +10,10 @@ class PostsController < ApplicationController
   def edit
     @post = current_user.posts.find(params[:id])
   end
+
+  def show
+    @post = @group.posts.find(params[:id])
+  end
   
   def create
     @post = @group.posts.build(post_params)
