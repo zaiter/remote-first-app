@@ -1,5 +1,5 @@
 <tr>
-  <td><%= render_post_content(post) %></td>
+  <td><%= link_to(render_post_content(post), group_post_path(post.group, post)) %></td>
   <td>
   <% if current_user == post.author %>
     <%= link_to("Edit", edit_group_post_path(post.group, post), class: "btn btn-info btn-xs")%>
