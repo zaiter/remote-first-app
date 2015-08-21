@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user! 
   before_action :find_group
-  before_action :member_required, only: [:new, :create ]
+  before_action :member_required, only: [:new, :create, :vote]
 
   def new
     @post = @group.posts.new
@@ -39,6 +39,18 @@ class PostsController < ApplicationController
     @post = current_user.posts.find(params[:id])
     @post.destroy
     redirect_to group_path(@group), alert: "文章已刪除"
+  end
+
+  def vote
+    @post = @group.posts.find(params[:id])
+    if !current_user.votes.include?(@post)
+      current_user.votes << @post
+      flash[:notice] = "這篇文章不錯"
+    else
+      current_user.votes.delete(@post)
+      flash[:warning] = "取消按讚"  
+    end
+    redirect_to group_path(@group)
   end
   
   private
