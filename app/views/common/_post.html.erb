@@ -1,6 +1,6 @@
 <tr>
   <td><%= link_to(render_post_content(post), group_post_path(post.group, post)) %></td>
-  <td><%= pluralize(post.vote_by_users.count, "vote") %></td>
+  <td><%= pluralize(post.vote_by_users.count, "votes") %></td>
   <td><%= link_to("<span class='glyphicon glyphicon-thumbs-up'></span>".html_safe, vote_group_post_path(post.group, post), class: "btn btn-default btn-xs", method: :post)%></td>
   <td>
   <% if current_user == post.author %>
