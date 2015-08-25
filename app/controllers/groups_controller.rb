@@ -3,7 +3,11 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @groups = Group.all
+    if params[:search]
+      @groups = Group.where('title LIKE ?', "%#{params[:search]}%")
+    else
+      @groups = Group.all
+    end
   end
 
   def show
