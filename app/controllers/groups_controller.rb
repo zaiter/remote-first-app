@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
     if params[:search]
       @groups = Group.where('title LIKE ?', "%#{params[:search]}%")
     else
-      @groups = Group.all
+      @groups = Group.page(params[:page]).per(5)
     end
   end
 

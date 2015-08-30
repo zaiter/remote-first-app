@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12 col-xd-12">
 
   <%= form_tag groups_path, method: :get do %>
       <%= text_field_tag :search, params[:search], placeholder: "Search" %>
@@ -22,5 +22,6 @@
       <h3> " Welcome Engineer ! "</h3>
       <%= render :partial => "common/group", :collection => @groups, :as => :group %>
     </tbody>
+    <%= paginate @groups, :theme => 'twitter-bootstrap-3' %>
   </table>
 </div>
