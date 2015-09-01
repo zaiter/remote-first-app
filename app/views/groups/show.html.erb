@@ -1,11 +1,13 @@
 <div class="col-md-12">
-  <div class="group">
-    <% if @group.editable_by?(current_user) %>
-      <%= link_to("Edit", edit_group_path(@group), class: "btn btn-warning pull-right")%>
-    <% end %>
-    <%= link_to("New Post", new_group_post_path(@group), class: "btn btn-info pull-right") %>  
+  <div class="group"> 
     <% if current_user.present? %>
-      <% if current_user.is_member_of?(@group) %>
+      <% if current_user == @group.owner %>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            版主～您好～
+          </div>
+        </div>
+      <% elsif current_user.is_member_of?(@group) %>
         <%= link_to("Quit Group", quit_group_path(@group), method: :post, class: "btn btn-danger") %>
       <% else %>
         <%= link_to("Join Group", join_group_path(@group), method: :post, class: "btn btn-info") %>
@@ -13,17 +15,25 @@
     <% end %>  
   </div>
 
-  <h2><%= @group.title %></h2>
-  <p><%= @group.description %></p>
-  <table class="table">
-    <thead>
-      <tr class = "active">
-        <th>文章</th>
-        <th colspan="4"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render :partial => "common/post", :collection => @posts, :as => :post %>
-    </tbody>
-  </table>
+  <div class="post">
+    <% if @group.editable_by?(current_user) %>
+      <%= link_to("Edit", edit_group_path(@group), class: "btn btn-warning pull-right")%>
+    <% end %>
+    <%= link_to("New Post", new_group_post_path(@group), class: "btn btn-info pull-right") %> 
+  </div>
+  <div class ="maincontent">
+    <h2><%= @group.title %></h2>
+    <p><%= @group.description %></p>
+    <table class="table">
+      <thead>
+        <tr class = "active">
+          <th>文章</th>
+          <th colspan="4"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render :partial => "common/post", :collection => @posts, :as => :post %>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,5 +1,10 @@
 <tr>
-  <td><%= link_to(render_post_content(post), group_post_path(post.group, post)) %></td>
+  <% if post.private_status == false or (post.private_status==true and current_user == post.author or current_user==post.group.owner) %>
+  	<td><%= link_to(render_post_content(post), group_post_path(post.group, post)) %></td>
+  <% else %>
+  	<td><%= render_post_content(post)+"......(這是私密留言)" %></td>
+  <% end %>
+
   <td><%= pluralize(post.vote_by_users.count, "votes") %></td>
   <td><%= link_to("<span class='glyphicon glyphicon-thumbs-up'></span>".html_safe, vote_group_post_path(post.group, post), class: "btn btn-default btn-xs", method: :post)%></td>
   <td>

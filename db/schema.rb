@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821015111) do
+ActiveRecord::Schema.define(version: 20150901081803) do
 
   create_table "group_users", force: :cascade do |t|
     t.integer  "group_id"
@@ -32,9 +32,10 @@ ActiveRecord::Schema.define(version: 20150821015111) do
   create_table "posts", force: :cascade do |t|
     t.text     "content"
     t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "user_id"
+    t.boolean  "private_status", default: false
   end
 
   create_table "user_post_votes", force: :cascade do |t|
